@@ -44,9 +44,6 @@ def main():
        
         listaTempo = listaTempo + [(fim - ini)]
 
-    #for i in range(9):
-     #   print(listaTempo[i])
-    
 
 def objetos():
           # peso, valor
@@ -112,17 +109,9 @@ def avaliacao(novaGeracao, objetosUsados, quantidadeIndividuos):
     melhorValor = avaliacaoFinal[0][2]
     contador = len(avaliacaoFinal)
 
-    #print("Ind|Peso|Volume")
-    #for i in range(contador):
-     #   print(avaliacaoFinal[i])
-
-    #print('----------------------')
-    #input('enter')
-
     avaliacaoFinal = fitness(avaliacaoFinal, contador)
 
     novaGeracao = reproducao(novaGeracao, avaliacaoFinal, contador, objetosUsados)
-    #print(len(novaGeracao))
     
     return novaGeracao, melhorValor, guardaAvaliacao
   
