@@ -204,9 +204,6 @@ def solucoesOtimas(lista, tamanho): # função que verifica os indivíduos da po
 
         listaSolucoes = listaS
 
-    #os.system("clear")
-    #input("Please press the Enter key to proceed")
-
     return listaSolucoes
 
 def fitness(lista, tamanho):
