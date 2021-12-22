@@ -1,17 +1,19 @@
 import random
-import os
 import time
+import matplotlib.pyplot as plt
 
 def main():
     QtdIndividuosGerados = 100
     objetosUsados = 20
     listaTempo = []
     
-    while(objetosUsados <= 100):
-        ini = time.time()
+    while(objetosUsados <= 100): # controle de objetos usados
+        ini = time.time() # inicia contagem do tempo de execução
         print(objetosUsados)
+
         listaSolucoes = []
         listaMelhores = []
+
         novaGeracao = geraPopulacao(objetosUsados, QtdIndividuosGerados)
         xGeracoes, contaGeracoes, verificaMelhor = 20, 0, 0
 
@@ -21,29 +23,36 @@ def main():
             listaSolucoes = listaSolucoes + [mel]
             conta = 0
 
-            if(verificaMelhor == 0):
+            if(verificaMelhor == 0): # encerra quando encontra o valor máximo 4x seguidas
                 for i in range(50):
                     if(mel == listaMelhores[i][2]):
                         conta += 1
-                    if(conta == 4): 
-                        print('peso', listaMelhores[i][1], 'valor', listaMelhores[i][2])                      
+                    if(conta == 4):
                         verificaMelhor = 1
                         contaGeracoes = xGeracoes
                         break
+                    
 
-            temMutacao = decisaoMutacao()
+            temMutacao = decisaoMutacao() # recebe a resposta se haverá ou não mutação
 
-            if(temMutacao):
+            if(temMutacao): # se ocorrer, faz a mutação
                 mutacao(novaGeracao, QtdIndividuosGerados, objetosUsados)
     
             contaGeracoes += 1
         
         objetosUsados += 10
-        fim = time.time()
+        fim = time.time() # encerra a contagem do tempo de execução
         print(fim - ini)
-       
+
         listaTempo = listaTempo + [(fim - ini)]
 
+    lista = [20, 30, 40, 50, 60, 70, 80, 90, 100]
+    y = listaTempo
+    x = lista
+    plt.scatter(x, y)
+    plt.plot(x, y)
+    plt.show()
+    
 
 def objetos():
           # peso, valor
@@ -97,12 +106,12 @@ def geraPopulacao(objetosUsados, quantidadeIndividuos):
 def avaliacao(novaGeracao, objetosUsados, quantidadeIndividuos):
     avaliacao = []
 
-    avaliacao = calculaPesoVolume(quantidadeIndividuos, objetosUsados, novaGeracao)
+    avaliacao = calculaPesoVolume(quantidadeIndividuos, objetosUsados, novaGeracao) # calcula o valor e o pese
 
-    avaliacao = bubbleSortOrdena(quantidadeIndividuos, avaliacao)
+    avaliacao = bubbleSortOrdena(quantidadeIndividuos, avaliacao) # ordena a população
 
     avaliacaoFinal = []
-    avaliacaoFinal = solucoesOtimas(avaliacao, quantidadeIndividuos)
+    avaliacaoFinal = solucoesOtimas(avaliacao, quantidadeIndividuos) # seleciona os melhores indivíduos
     guardaAvaliacao = []
     guardaAvaliacao = avaliacaoFinal
 
